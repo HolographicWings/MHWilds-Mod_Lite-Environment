@@ -1,7 +1,7 @@
 # Wind Simulation Disabler - Installation Guide  
 
 ## Description  
-This mod **Disables Wind Simulation** in *Monster Hunter Wilds*, which fixes heavy lags with Pascal GPUs.  
+This mod **Disables the Wind Simulation** in *Monster Hunter Wilds*, which fixes heavy lags with Pascal GPUs.  
 It also provides an in-game toggle via the **REFramework UI**.  
 
 ---  
