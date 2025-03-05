@@ -16,7 +16,7 @@ It also provides an in-game toggle via the **REFramework UI**.
 
 ## Installation guide:  
 
-### Step 1:  
+### Step 1: (After installed [**REFramework**](https://github.com/praydog/REFramework-nightly/releases))  
 - Download the mod's archive from the Releases tab. *(Anyway, it's not the first time you download something on github).*  
 
 ### Step 2:  
