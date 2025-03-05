@@ -66,4 +66,5 @@ It also provides an in-game toggle via the **REFramework UI**.
 
 ## Credits:  
 - **REFramework:** [Praydog](https://github.com/praydog)
-- **The Wrench&Gear image in the banner of the mod:** [www.flaticon.com](https://www.flaticon.com/kr/free-icon/repair_9759793)
+- **The Wrench&Gear image on the banner of the mod:** [www.flaticon.com](https://www.flaticon.com/kr/free-icon/repair_9759793)
+- **The Cutout 1080 Ti image on the banner of the mod:** [www.notebookcheck.com](https://www.notebookcheck.com/NVIDIA-GeForce-GTX-1080-Ti-Desktop.199808.0.html)
