@@ -23,7 +23,7 @@ It also provides an in-game toggle via the **REFramework UI**.
 - Navigate to your *Monster Hunter Wilds* installation folder.  
   *Typically located at:*  
   `"C:\Program Files (x86)\Steam\steamapps\common\MonsterHunterWilds\"`  
-- Drop the content of the archive inside. *(The mod should follow the path "MonsterHunterWilds\reframework\autorun\wind_simulation_disabler.lua")  
+- Drop the content of the archive inside. *(The mod should follow the path "MonsterHunterWilds\reframework\autorun\wind_simulation_disabler.lua")*  
 
 ### Step 3: *(The hardest part)*  
 - **Start Monster Hunter Wilds**.  
