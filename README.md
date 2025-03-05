@@ -8,7 +8,7 @@ It also provides an in-game toggle via the **REFramework UI**.
 
 ## Installation requirements:  
 
-- [**REFramework**](https://www.nexusmods.com/monsterhunterwilds/mods/93). (Required)  
+- [**REFramework**](https://github.com/praydog/REFramework-nightly/releases). (Required)  
 - A basic understanding of words. (placing files in the correct directory)  
 - To not be offended by my jokes. (fully optional) *You surely have more braincells than me anyway.*  
 
@@ -17,7 +17,7 @@ It also provides an in-game toggle via the **REFramework UI**.
 ## Installation guide:  
 
 ### Step 1:  
-- Download the mod's archive from the Files tab. *(Anyway, it's not the first time you download a mod here).*  
+- Download the mod's archive from the Releases tab. *(Anyway, it's not the first time you download something on github).*  
 
 ### Step 2:  
 - Navigate to your *Monster Hunter Wilds* installation folder.  
