@@ -65,4 +65,5 @@ It also provides an in-game toggle via the **REFramework UI**.
 ---  
 
 ## Credits:  
-- **REFramework:** [Praydog](https://github.com/praydog)  
+- **REFramework:** [Praydog](https://github.com/praydog)
+- **The Wrench&Gear image in the banner of the mod:** [www.flaticon.com](https://www.flaticon.com/kr/free-icon/repair_9759793)
