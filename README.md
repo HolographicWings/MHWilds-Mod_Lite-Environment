@@ -21,11 +21,9 @@ It also provides an in-game toggle via the **REFramework UI**.
 
 ### Step 2:  
 - Navigate to your *Monster Hunter Wilds* installation folder.  
-
   *Typically located at:*  
   `"C:\Program Files (x86)\Steam\steamapps\common\MonsterHunterWilds\"`  
-
-- Drop the content of the archive inside.  
+- Drop the content of the archive inside. *(The mod should follow the path "MonsterHunterWilds\reframework\autorun\wind_simulation_disabler.lua")  
 
 ### Step 3: *(The hardest part)*  
 - **Start Monster Hunter Wilds**.  
@@ -34,7 +32,6 @@ It also provides an in-game toggle via the **REFramework UI**.
 - **Open REFramework UI (Press `Insert` key by default).**  
 - **Scroll down and navigate to "Script Generated UI" then to "Wind Simulation Disabler"**  
 - **Toggle the "Enabled" checkbox.**  
-
   *The value will be saved and persists after restarting the game.*  
 
 ---  
@@ -53,9 +50,7 @@ It also provides an in-game toggle via the **REFramework UI**.
 
 - Delete the **wind_simulation_disabler.lua** file from:  
   `"MonsterHunterWilds\reframework\autorun\"`  
-
   *Or directly the* `"reframework"` *folder if it's the only mod you installed.*  
-
 - *(Optional)* Delete the configuration file:  
   `"MonsterHunterWilds\reframework\data\wind_simulation_disabler.txt"`  
 
@@ -64,12 +59,10 @@ It also provides an in-game toggle via the **REFramework UI**.
 ## Troubleshooting:  
 
 - **Mod not working?**  
-
   Ensure REFramework is installed and working.  
   Check that the script is in `"MonsterHunterWilds\reframework\autorun\"`.  
 
 ---  
 
 ## Credits:  
-
 - **REFramework:** [Praydog](https://github.com/praydog)  
