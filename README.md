@@ -39,7 +39,7 @@ It also provides some in-game toggles via the **REFramework UI**.
 ## Medias:  
 
 ### Comparison ImgSlide (5 Pictures):  
-[ImgSlide](https://imgsli.com/MzU3OTkw)  
+[ImgSlide](https://imgsli.com/MzU3OTkw/1/2)  
 
 ### Comparison video:  
 [![Comparison Video](https://img.youtube.com/vi/It6TIwB-5LI/0.jpg)](https://www.youtube.com/watch?v=It6TIwB-5LI)  
