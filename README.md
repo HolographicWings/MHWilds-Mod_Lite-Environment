@@ -81,11 +81,11 @@ Advanced method:
 ```
 ﻿﻿-- Mod header
 local mod = {
-    name = "Lite Environment",
+    name = "Your Mod Name",
     id = "YourModID",
-    version = "2.0.0",
-    author = "HolographicWings",
-    settings = settings
+    version = "1.0.0",
+    author = "YourName",
+    settings = settings -- Or other fields/tables you want to share
 }
 _G[mod.id] = mod -- Globalize mod header
 ```
