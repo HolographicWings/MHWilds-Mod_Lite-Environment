@@ -67,6 +67,43 @@ It also provides some in-game toggles via the **REFramework UI**.
 
 ---  
 
+## Compatibility:
+### **ModID of this mod:** "*LiteEnvironmentMod*"
+
+**In order of managing compatibility between REFramework scripts, i propose a convention using a mod header stored in a Global variable.**
+
+To make it, you must add this at the begining of your script:
+Simple method:
+```
+﻿﻿_G[YourModID] = true
+```
+Advanced method:
+```
+﻿﻿-- Mod header
+local mod = {
+    name = "Lite Environment",
+    id = "YourModID",
+    version = "2.0.0",
+    author = "HolographicWings",
+    settings = settings
+}
+_G[mod.id] = mod -- Globalize mod header
+```
+Ofc replace "YourModID" by something else.
+
+The goal is to allow other mods to know if your is loaded, on the purpose of adapting the behavior of our mods in the case some conflicts happens.
+To check if another mod exists:
+```
+﻿if _G["ModID"] then
+    -- Mod found
+else
+    -- Mod not found
+end
+```
+If a mod use the advanced method, "`_G["ModID"].version`" or "`.settings`" could be used by exemple.
+
+---  
+
 ## Credits:  
 - **REFramework:** [Praydog](https://github.com/praydog)
 - **GI Disabler:** [SnakeyHips](https://www.nexusmods.com/monsterhunterwilds/mods/331)
