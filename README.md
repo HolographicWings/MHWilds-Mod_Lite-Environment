@@ -1,4 +1,4 @@
-# Wind Simulation Disabler - Installation Guide  
+# Lite Environment - Installation Guide  
 
 ## Description  
 This mod **Disables the Wind Simulation, Global Illumination and Volumetric Fog** in *Monster Hunter Wilds*, which fix heavy lags with Old Gen GPUs.  
