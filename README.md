@@ -75,7 +75,7 @@ It also provides some in-game toggles via the **REFramework UI**.
 To make it, you must add this at the begining of your script:
 Simple method:
 ```
-﻿﻿_G[YourModID] = true
+﻿﻿_G["YourModID"] = true
 ```
 Advanced method:
 ```
