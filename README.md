@@ -28,7 +28,7 @@ It also provides some in-game toggles via the **REFramework UI**.
 ### Step 3: *(The hardest part)*  
 - **Start Monster Hunter Wilds**.  
 
-### Step 4: *(To disable GI and Fog/compare)*  
+### Step 4: *(To disable GI and Fog/Compare)*  
 - **Open REFramework UI (Press `Insert` key by default).**  
 - **Scroll down and navigate to "Script Generated UI" then to "Lite Environment"**  
 - **Toggle the checkboxes to enable or disable the settings.**  
