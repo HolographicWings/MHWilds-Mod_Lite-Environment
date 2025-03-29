@@ -153,7 +153,7 @@ re.on_frame(function()
     end
 end)
 ```
-If a mod use the advanced method, "`_G["ModID"].version`" or "`.settings`" could be used by exemple. (But only in a `re.on_frame`, `re.on_draw_ui` callbacks, `on_loaded` function or in an hooked method from the game)
+If a mod uses the advanced method, "`_G["ModID"].version`" or "`.settings`" could be used by exemple. (But only in a `re.on_frame`, `re.on_draw_ui` callbacks, `on_loaded` function or in an hooked method from the game)
 
 ---  
 
