@@ -98,16 +98,53 @@ _G[mod.id] = mod -- Globalize mod header
 ```
 Ofc replace "YourModID" by something else.
 
-The goal is to allow other mods to know if your is loaded, on the purpose of adapting the behavior of our mods in the case some conflicts happens.
-To check if another mod exists:
+**Checking if Another Script is Loaded:**
+Due to the alphabetical load order of scripts, the only reliable way i found to check for other mods is to use this approach.
+
+Steps to Ensure Proper Detection:
+- Declare a boolean at the beginning of your script for every mod you want to check.
+- Create an `on_loaded` function anywhere to handle actions once all scripts are loaded. (optional)
+- Declare a `scripts_loaded` boolean combined with the `re.on_frame` callback at the end of the script.
+
+Example:
+At the Beginning of Your Script:
+```lua
+-- Settings table
+local settings =
+{
+    -- Settings variables here
+}
+-- Mod header
+local mod = {
+    -- Header here
+}
+_G[mod.id] = mod -- Globalize mod header
+
+-- Compatibility measures fields
+local ExempleMod_Measure = false -- One boolean for each mod to check
 ```
-﻿if _G["ModID"] then
-    -- Mod found
-else
-    -- Mod not found
+Define the `on_loaded` Function: (Optional)
+```lua
+﻿local function on_loaded()
+    -- Actions to take once all scripts are loaded
 end
 ```
-If a mod use the advanced method, "`_G["ModID"].version`" or "`.settings`" could be used by exemple.
+Check for Other Mods in the `on_frame` Callback:
+```lua
+﻿-- Compatibility measures & on_loaded calling
+local scripts_loaded = false -- To ensure that "re.on_frame" is only called only once
+re.on_frame(function()
+    if not scripts_loaded then
+        -- Check if the target mod is present
+        ExempleMod_Measure = _G["TargetModID"] ~= nil -- Define true or false depending of if the mod is found (do that for every boolean you declared at the begining)
+        
+        -- Mark scripts as loaded and call on_loaded
+        scripts_loaded = true
+        on_loaded()
+    end
+end)
+```
+If a mod use the advanced method, "`_G["ModID"].version`" or "`.settings`" could be used by exemple. (But only in a `re.on_frame`, `re.on_draw_ui` callbacks, `on_loaded` function or in an hooked method from the game)
 
 ---  
 
