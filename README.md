@@ -73,25 +73,32 @@ It also provides some in-game toggles via the **REFramework UI**.
 
 ---  
 
-## Compatibility:
+## Compatibility convention:
 ### **ModID of this mod:** "*LiteEnvironmentMod*"
 
 **In order of managing compatibility between REFramework scripts, i propose a convention using a mod header stored in a Global variable.**
 
-To make it, you must add this at the begining of your script:
-Simple method:
-```
+To make it, you must add one of theses two things:
+
+__Simple method:__ (Can be placed anywhere while it's ran once, but at the begining of the script is recommended)
+```lua
 ﻿﻿_G["YourModID"] = true
 ```
-Advanced method:
-```
+__Advanced method:__ (Must be placed AFTER your settings table)
+```lua
+﻿﻿-- Mod header
+local settings =
+{
+    --- Your settings here
+}
+
 ﻿﻿-- Mod header
 local mod = {
     name = "Your Mod Name",
     id = "YourModID",
     version = "1.0.0",
-    author = "YourName",
-    settings = settings -- Or other fields/tables you want to share
+    author = "Your Name",
+    settings = settings -- 
 }
 _G[mod.id] = mod -- Globalize mod header
 ```
