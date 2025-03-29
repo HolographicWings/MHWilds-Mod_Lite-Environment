@@ -141,7 +141,7 @@ end
 Check for Other Mods in the `on_frame` Callback:
 ```lua
 ﻿-- Compatibility measures & on_loaded calling
-local scripts_loaded = false -- To ensure that "re.on_frame" is only called only once
+local scripts_loaded = false -- To ensure that "re.on_frame" is only called once
 re.on_frame(function()
     if not scripts_loaded then
         -- Check if the target mod is present
