@@ -49,6 +49,12 @@ It also provides some in-game toggles via the **REFramework UI**.
 
 ---  
 
+## Compatibility:  
+
+- [Disable Post Processing Effects by TonWonton](https://www.nexusmods.com/monsterhunterwilds/mods/221): ✅Compatible (Only in 2.0.2 preview version)
+
+---  
+
 ## Uninstallation:  
 
 - Delete the **lite_environment.lua** file from:  
@@ -67,7 +73,7 @@ It also provides some in-game toggles via the **REFramework UI**.
 
 ---  
 
-## Compatibility:
+## Compatibility convention:
 ### **ModID of this mod:** "*LiteEnvironmentMod*"
 
 **In order of managing compatibility between REFramework scripts, i propose a convention using a mod header stored in a Global variable.**
