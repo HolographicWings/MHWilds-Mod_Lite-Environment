@@ -100,7 +100,7 @@ Ofc replace "YourModID" by something else.
 
 
 
-**Checking if Another Script is Loaded:**
+### **Checking if Another Script is Loaded:**
 
 Due to the alphabetical load order of scripts, the only reliable way i found to check for other mods is to use this approach.
 
