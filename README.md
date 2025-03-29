@@ -51,7 +51,7 @@ It also provides some in-game toggles via the **REFramework UI**.
 
 ## Compatibility:  
 
-- [Disable Post Processing Effects by TonWonton](https://www.nexusmods.com/monsterhunterwilds/mods/221): Compatible
+- [Disable Post Processing Effects by TonWonton](https://www.nexusmods.com/monsterhunterwilds/mods/221): ✅Compatible
 
 ---  
 
