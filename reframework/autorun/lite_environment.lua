@@ -77,12 +77,19 @@ apply_ws_setting() -- Apply wind simulation setting immediately after loading co
 apply_gi_setting() -- Apply global illumination setting immediately after loading config
 apply_vf_setting() -- Apply volumetric fog setting immediately after loading config
 
--- Hook the game's cacheEnvironment method (to apply the Global Illumination setting after loaded a save)
+-- Hook the Camera's onSceneLoadFadeIn method (to apply the Global Illumination setting after loadings)
 sdk.hook(
-    sdk.find_type_definition("app.EnvironmentManager"):get_method("cacheEnvironment"),
+    sdk.find_type_definition("app.CameraManager"):get_method("onSceneLoadFadeIn"),
     function() end,
     apply_gi_setting
 )
+-- (alternative hook in case the first one isn't enough)
+-- Hook the Camera's onCut method (to apply the Global Illumination setting after cuts)
+-- sdk.hook(
+    -- sdk.find_type_definition("app.CameraManager"):get_method("onCut"),
+    -- function() end,
+    -- apply_gi_setting
+-- )
 
 -- REFramework UI rendering
 re.on_draw_ui(function()
