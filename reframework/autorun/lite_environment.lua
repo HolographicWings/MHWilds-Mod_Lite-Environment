@@ -1,20 +1,4 @@
--- Mod header
-local mod = {
-    name = "Lite Environment",
-    id = "LiteEnvironmentMod",
-    version = "2.0.1p",
-    author = "HolographicWings",
-    settings = settings
-}
-_G[mod.id] = mod -- Globalize mod header
-log.info(string.format("%s v%s is loading", mod.name, mod.version))
-
-local config_path = "lite_environment.json" -- Stored in \MonsterHunterWilds\reframework\data
-
-local wind_manager = sdk.get_managed_singleton("app.WindManager")
-local environment_manager = sdk.get_managed_singleton("app.EnvironmentManager")
-local graphics_manager = sdk.get_managed_singleton("app.GraphicsManager")
-
+-- Settings table
 local settings =
 {
     wind_simulation = false, -- Disabled by default
@@ -22,6 +6,27 @@ local settings =
     volumetric_fog = true -- Enabled by default
 }
 
+-- Mod header
+local mod = {
+    name = "Lite Environment",
+    id = "LiteEnvironmentMod",
+    version = "2.0.2p",
+    author = "HolographicWings",
+    settings = settings
+}
+_G[mod.id] = mod -- Globalize mod header
+
+log.info(string.format("%s v%s is loading", mod.name, mod.version))
+
+-- Compatibility measures fields
+local DPPE_CM = false -- Boolean for "Disable Post Processing Effects" mod from TonWonton
+
+local config_path = "lite_environment.json" -- Stored in \MonsterHunterWilds\reframework\data
+
+-- Finding RE Managed singletons
+local wind_manager = sdk.get_managed_singleton("app.WindManager")
+local environment_manager = sdk.get_managed_singleton("app.EnvironmentManager")
+local graphics_manager = sdk.get_managed_singleton("app.GraphicsManager")
 
 -- Write to the configuration file
 local function save_config()
@@ -63,7 +68,7 @@ end
 -- Apply the volumetric fog setting
 local function apply_vf_setting()
 	if not graphics_manager then return end
-
+	if DPPE_CM then return end -- Disable VF control if "Disable Post Processing Effects" mod is present
 	local graphics_setting = graphics_manager:call("get_NowGraphicsSetting")
 
     if graphics_setting then
@@ -72,10 +77,12 @@ local function apply_vf_setting()
     end
 end
 
-load_config() -- Load the configuration file on startup
-apply_ws_setting() -- Apply wind simulation setting immediately after loading config
-apply_gi_setting() -- Apply global illumination setting immediately after loading config
-apply_vf_setting() -- Apply volumetric fog setting immediately after loading config
+local function on_loaded()
+	load_config() -- Load the configuration file on startup
+	apply_ws_setting() -- Apply wind simulation setting immediately after loading config
+	apply_gi_setting() -- Apply global illumination setting immediately after loading config
+	apply_vf_setting() -- Apply volumetric fog setting immediately after loading config
+end
 
 -- Hook the Camera's onSceneLoadFadeIn method (to apply the Global Illumination setting after loadings)
 sdk.hook(
@@ -107,11 +114,13 @@ re.on_draw_ui(function()
             imgui.set_tooltip("Medium performance improvement.\n\nHighly deteriorate the visual quality.")
         end
 		
-        vf_changed = imgui.checkbox("Disable Volumetric Fog", not settings.volumetric_fog) -- Add a checkbox to disable the volumetric fog
+		imgui.begin_disabled(DPPE_CM)
+        vf_changed = imgui.checkbox(not DPPE_CM and "Disable Volumetric Fog" or "(Disabled for compatibility) Disable Volumetric Fog", not settings.volumetric_fog) -- Add a checkbox to disable the volumetric fog
         if imgui.is_item_hovered() then
             imgui.set_tooltip("Medium performance improvement.\n\nHighly deteriorate the visual quality.")
         end
-        
+		imgui.end_disabled()
+
 		-- On wind simulation toggled
         if ws_changed then
 			settings.wind_simulation = not settings.wind_simulation
@@ -133,6 +142,16 @@ re.on_draw_ui(function()
 
         imgui.tree_pop()
     end
+end)
+
+-- Compatibility measures
+local scripts_loaded = false
+re.on_frame(function() -- "re.on_frame" begin to be invoked only once all the Scripts are loaded
+	if not scripts_loaded then
+		DPPE_CM = _G["DisablePostProcessingEffects"] ~= nil -- Define true or false depending of if the mod is found
+		scripts_loaded = true
+		on_loaded()
+	end
 end)
 
 log.info(string.format("%s v%s is loaded", mod.name, mod.version))
