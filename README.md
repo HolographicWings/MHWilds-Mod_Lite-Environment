@@ -142,7 +142,7 @@ Check for Other Mods in the `on_frame` Callback:
 ```lua
 ﻿-- Compatibility measures & on_loaded calling
 local scripts_loaded = false -- To ensure that "re.on_frame" is only called once
-re.on_frame(function()
+re.on_frame(function() -- "re.on_frame" is called only once all lua mods are loaded
     if not scripts_loaded then
         -- Check if the target mod is present
         ExempleMod_Measure = _G["TargetModID"] ~= nil -- Define true or false depending of if the mod is found (do that for every boolean you declared at the begining)
