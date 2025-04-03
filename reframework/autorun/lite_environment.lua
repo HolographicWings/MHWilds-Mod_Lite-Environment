@@ -44,7 +44,7 @@ local function load_config()
 			end
 		end
 	else
-		log.warn(string.format("[%s]Failed to load config file or file is invalid. Regenerating with default settings.", mod.name))
+		log.warn(string.format("[%s]Failed to load config file. Regenerating with default settings.", mod.name))
 		save_config()
 	end
 end
