@@ -22,7 +22,7 @@ local scripts_loaded = false
 local config_path = "lite_environment.json" -- Stored in \MonsterHunterWilds\reframework\data
 local wind_manager, environment_manager, graphics_manager
 
--- Watchdog (Anti loop security)
+-- Watchdog (Anti infinite loop security)
 local start_time = os.clock()
 local wd_time = 10.0 -- Timeout duration
 
@@ -90,7 +90,7 @@ local function on_loaded()
 	graphics_manager = sdk.get_managed_singleton("app.GraphicsManager")
 	
 	if not (wind_manager and environment_manager and graphics_manager) then
-		if os.clock() - start_time < wd_time then -- Watchdog (Anti loop security)
+		if os.clock() - start_time < wd_time then -- Watchdog (Anti infinite loop security)
 			return -- Retry next frame
 		else
 			log.warn(string.format("[%s] One or several managers not found after %.0f seconds. Continuing anyway (some features may not work).", mod.name, wd_time)) -- Continue anyway
