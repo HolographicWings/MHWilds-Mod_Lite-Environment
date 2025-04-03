@@ -89,13 +89,13 @@ local function on_loaded()
 	environment_manager = sdk.get_managed_singleton("app.EnvironmentManager")
 	graphics_manager = sdk.get_managed_singleton("app.GraphicsManager")
 	
-	if not (wind_manager and environment_manager and graphics_manager) then
+	if not (wind_manager and environment_manager and graphics_manager) then -- Ensure to retry if the script loaded before the game
 		if os.clock() - start_time < wd_time then -- Watchdog (Anti infinite loop security)
 			return -- Retry next frame
 		else
 			log.warn(string.format("[%s] One or several managers not found after %.0f seconds. Continuing anyway (some features may not work).", mod.name, wd_time)) -- Continue anyway
 		end
-	end -- Ensure to retry if the script loaded before the game
+	end
 
 	DPPE_CM = _G["DisablePostProcessingEffects"] ~= nil -- Define true or false depending of if the mod is found
 	
