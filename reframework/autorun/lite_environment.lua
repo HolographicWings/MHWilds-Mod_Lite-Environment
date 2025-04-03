@@ -44,7 +44,7 @@ local function load_config()
 			end
 		end
 	else
-		log.warn(string.format("[%s]Failed to load config file. Regenerating with default settings.", mod.name))
+		log.warn(string.format("[%s] Failed to load config file. Regenerating with default settings.", mod.name))
 		save_config()
 	end
 end
@@ -93,7 +93,7 @@ local function on_loaded()
 		if os.clock() - start_time < wd_time then -- Watchdog (Anti loop security)
 			return -- Retry next frame
 		else
-			log.warn(string.format("[%s]One or several managers not found after %.0f seconds. Continuing anyway (some features may not work).", mod.name, wd_time)) -- Continue anyway
+			log.warn(string.format("[%s] One or several managers not found after %.0f seconds. Continuing anyway (some features may not work).", mod.name, wd_time)) -- Continue anyway
 		end
 	end -- Ensure to retry if the script loaded before the game
 
