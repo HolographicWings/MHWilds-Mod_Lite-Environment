@@ -150,19 +150,18 @@ re.on_draw_ui(function()
 		if ws_changed then
 			settings.wind_simulation = not settings.wind_simulation
 			apply_ws_setting()
+			save_config()
 		end
 		-- On global illumination toggled
 		if gi_changed then
 			settings.global_illumination = not settings.global_illumination
 			apply_gi_setting()
+			save_config()
 		end
 		-- On volumetric fog toggled
 		if vf_changed then
 			settings.volumetric_fog = not settings.volumetric_fog
 			apply_vf_setting()
-		end
-
-		if ws_changed or gi_changed or vf_changed then
 			save_config()
 		end
 
