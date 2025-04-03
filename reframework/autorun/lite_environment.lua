@@ -22,6 +22,10 @@ local scripts_loaded = false
 local config_path = "lite_environment.json" -- Stored in \MonsterHunterWilds\reframework\data
 local wind_manager, environment_manager, graphics_manager
 
+-- Watchdog (Anti loop security)
+local start_time = os.clock()
+local wd_time = 10.0 -- Timeout duration
+
 -- Compatibility measures fields
 local DPPE_CM = false -- Boolean for "Disable Post Processing Effects" mod from TonWonton
 
@@ -33,9 +37,11 @@ end
 -- Read the configuration file
 local function load_config()
 	local loadedTable = json.load_file(config_path)
-	if loadedTable ~= nil then
-		for key, val in pairs(loadedTable) do
-			settings[key] = loadedTable[key]
+	if type(loadedTable) == "table" then
+		for key, val in pairs(settings) do
+			if loadedTable[key] ~= nil then
+				settings[key] = loadedTable[key]
+			end
 		end
 	end
 end
@@ -79,7 +85,14 @@ local function on_loaded()
 	wind_manager = sdk.get_managed_singleton("app.WindManager")
 	environment_manager = sdk.get_managed_singleton("app.EnvironmentManager")
 	graphics_manager = sdk.get_managed_singleton("app.GraphicsManager")
-	if not (wind_manager and environment_manager and graphics_manager) then return end -- Ensure to retry if the script loaded before the game
+	
+	if not (wind_manager and environment_manager and graphics_manager) then
+		if os.clock() - start_time < wd_time then -- Watchdog (Anti loop security)
+			return -- Retry next frame
+		else
+			log.warn(string.format("One or several managers not found after %.0f seconds. Continuing anyway (some features may not work).", wd_time)) -- Continue anyway
+		end
+	end -- Ensure to retry if the script loaded before the game
 
 	DPPE_CM = _G["DisablePostProcessingEffects"] ~= nil -- Define true or false depending of if the mod is found
 	
@@ -107,11 +120,12 @@ sdk.hook(
 -- )
 
 -- REFramework UI rendering
+local ui_node_title = string.format("%s v%s", mod.name, mod.version)
 re.on_draw_ui(function()
 	local ws_changed, gi_changed, vf_changed = false
 
 	-- Create new REFramework UI Node
-	if imgui.tree_node(string.format("%s v%s", mod.name, mod.version)) then
+	if imgui.tree_node(ui_node_title) then
 		ws_changed = imgui.checkbox("Disable Wind Simulation", not settings.wind_simulation) -- Add a checkbox to disable the wind simulation
 		if imgui.is_item_hovered() then
 			imgui.set_tooltip("Huge performance improvement.\n\nThe vegetation and tissues sway will not longer\ndepend of the wind intensity and direction.")
@@ -133,18 +147,19 @@ re.on_draw_ui(function()
 		if ws_changed then
 			settings.wind_simulation = not settings.wind_simulation
 			apply_ws_setting()
-			save_config()
 		end
 		-- On global illumination toggled
 		if gi_changed then
 			settings.global_illumination = not settings.global_illumination
 			apply_gi_setting()
-			save_config()
 		end
 		-- On volumetric fog toggled
 		if vf_changed then
 			settings.volumetric_fog = not settings.volumetric_fog
 			apply_vf_setting()
+		end
+
+		if ws_changed or gi_changed or vf_changed then
 			save_config()
 		end
 
