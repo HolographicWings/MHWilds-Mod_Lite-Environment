@@ -10,7 +10,7 @@ local settings =
 local mod = {
 	name = "Lite Environment",
 	id = "LiteEnvironmentMod",
-	version = "2.0.3p",
+	version = "2.0.3",
 	author = "HolographicWings",
 	settings = settings
 }
