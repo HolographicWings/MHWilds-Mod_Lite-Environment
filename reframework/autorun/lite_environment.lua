@@ -132,35 +132,35 @@ local is_restored = false
 
 -- Contains Util
 local function contains(tab, val)
-    for i = 1, #tab do
-        if tab[i] == val then
-            return true
-        end
-    end
-    return false
+	for i = 1, #tab do
+		if tab[i] == val then
+			return true
+		end
+	end
+	return false
 end
 
 sdk.hook(sdk.find_type_definition("app.DemoMediator"):get_method("onPlayStart"), function() -- Cutscene start
 
-    if not demo_mediator then
-        return sdk.PreHookResult.CALL_ORIGINAL
-    end
-	local current_event = demo_mediator:call("get_CurrentTimelineEventID") -- Get the cutscene's ID
-    if not current_event then
+	if not demo_mediator then
 		return sdk.PreHookResult.CALL_ORIGINAL
-    end
+	end
+	local current_event = demo_mediator:call("get_CurrentTimelineEventID") -- Get the cutscene's ID
+	if not current_event then
+		return sdk.PreHookResult.CALL_ORIGINAL
+	end
 	
 	if contains(settings.cutscene_restore_GI and skip_softlist or skip_hardlist_GI, current_event) then -- Restore GI if "Restore Global Illumination during Cutscenes" setting is checked or if the cutscene is in hardlist
 		print("Restore GI for the cutscene")
 		apply_gi_setting(true)
 		is_restored = true
-    end
+	end
 	
 	if contains(settings.cutscene_restore_VF and skip_softlist or skip_hardlist_VF, current_event) then -- Restore GI if "Restore Volumetric Fog during Cutscenes" setting is checked or if the cutscene is in hardlist
 		print("Restore VF for the cutscene")
 		apply_vf_setting(true)
 		is_restored = true
-    end
+	end
 		
 	return sdk.PreHookResult.CALL_ORIGINAL
 end, nil)
