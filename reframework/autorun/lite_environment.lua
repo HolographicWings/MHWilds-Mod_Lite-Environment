@@ -12,7 +12,7 @@ local settings =
 local mod = {
 	name = "Lite Environment",
 	id = "LiteEnvironmentMod",
-	version = "2.1.1",
+	version = "2.2.0",
 	author = "HolographicWings",
 	settings = settings
 }
@@ -100,6 +100,8 @@ local function on_loaded()
 	graphics_manager = sdk.get_managed_singleton("app.GraphicsManager")
 	demo_mediator = sdk.get_managed_singleton("app.DemoMediator")
 	
+	is_benchmark = sdk.get_managed_singleton("app.BenchmarkManager") ~= nil -- Check if build is game or benchmark
+	
 	if not (wind_manager and environment_manager and graphics_manager) then -- Ensure to retry if the script loaded before the game
 		if os.clock() - start_time < wd_time then -- Watchdog (Anti infinite loop security)
 			return -- Retry next frame
@@ -145,6 +147,11 @@ sdk.hook(sdk.find_type_definition("app.DemoMediator"):get_method("onPlayStart"),
 	if not demo_mediator then
 		return sdk.PreHookResult.CALL_ORIGINAL
 	end
+	
+	if is_benchmark then
+		return sdk.PreHookResult.CALL_ORIGINAL
+	end
+	
 	local current_event = demo_mediator:call("get_CurrentTimelineEventID") -- Get the cutscene's ID
 	if not current_event then
 		return sdk.PreHookResult.CALL_ORIGINAL
@@ -200,15 +207,20 @@ re.on_draw_ui(function()
 		
 		if imgui.collapsing_header("Cutscenes Settings") then
 			imgui.indent(25)
-			crgi_changed = imgui.checkbox("Restore GI during Cutscenes", settings.cutscene_restore_GI) -- Add a checkbox to Restore Global Illumination during Cutscenes
+			
+			imgui.begin_disabled(is_benchmark)
+			
+			crgi_changed = imgui.checkbox(not is_benchmark and "Restore GI during Cutscenes" or "(Disabled in benchmark) Restore GI during Cutscenes", settings.cutscene_restore_GI) -- Add a checkbox to Restore Global Illumination during Cutscenes
 			if imgui.is_item_hovered() then
 				imgui.set_tooltip("Enable again the Global Illumination during Cutscenes.")
 			end
 			
-			crvf_changed = imgui.checkbox("Restore VF during Cutscenes", settings.cutscene_restore_VF) -- Add a checkbox to Restore Volumetric Fog during Cutscenes
+			crvf_changed = imgui.checkbox(not is_benchmark and "Restore VF during Cutscenes" or "(Disabled in benchmark) Restore VF during Cutscenes", settings.cutscene_restore_VF) -- Add a checkbox to Restore Volumetric Fog during Cutscenes
 			if imgui.is_item_hovered() then
 				imgui.set_tooltip("Enable again the Disable Volumetric during Cutscenes.")
 			end
+			
+			imgui.end_disabled()
 		end
 		
 		-- On "Wind Simulation" toggled
