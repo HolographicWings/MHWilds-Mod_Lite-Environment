@@ -1,3 +1,7 @@
+if reframework:get_game_name() ~= "mhwilds" then
+	return
+end
+
 -- Settings table
 local settings =
 {
@@ -12,7 +16,7 @@ local settings =
 local mod = {
 	name = "Lite Environment",
 	id = "LiteEnvironmentMod",
-	version = "2.2.1",
+	version = "2.2.2",
 	author = "HolographicWings",
 	settings = settings
 }
@@ -127,9 +131,9 @@ sdk.hook(sdk.find_type_definition("app.CameraManager"):get_method("onSceneLoadFa
 )
 
 -- Cutscenes Workaround
-local skip_softlist = {1,2,3,4,5,6,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,42,43,44,45,46,47,48,49,51,52,56,57,59,100,102,103,104,130,1001,1002,1003,1004,1005,2013} -- List of cutscenes that might require to restore GI and VF
-local skip_hardlist_GI = {10,11,19,28,29,37,38,44,103} -- List of cutscenes where Global Illumination is MANDATORY
-local skip_hardlist_VF= {11,17,20,27,29,130,1005,2013} -- List of cutscenes where Volumetric Fog is MANDATORY
+local skip_softlist = {1,2,3,4,5,6,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,42,43,44,45,46,47,48,49,51,52,56,57,59,100,102,103,104,130,1001,1002,1003,1004,1005,1006,2013} -- List of cutscenes that might require to restore GI and VF
+local skip_hardlist_GI = {10,11,19,28,29,37,38,44,103,1006} -- List of cutscenes where Global Illumination is MANDATORY
+local skip_hardlist_VF= {11,17,20,27,29,130,1005,1006,2013} -- List of cutscenes where Volumetric Fog is MANDATORY
 local is_restored = false
 
 -- Contains Util
